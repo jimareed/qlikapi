@@ -45,7 +45,7 @@ type Items struct {
 	Data []Item
 }
 
-func getItems(apiKey string) (Items, error) {
+func getItems(apiKey string, tenantUrl string) (Items, error) {
 
 	var items Items
 
@@ -54,7 +54,7 @@ func getItems(apiKey string) (Items, error) {
 	}
 	client := &http.Client{Transport: transCfg}
 
-	req, err := http.NewRequest("GET", "https://qcs.us.qlikcloud.com/api/v1/items", nil)
+	req, err := http.NewRequest("GET", tenantUrl+"/api/v1/items", nil)
 	req.Header.Add("Authorization", "Bearer "+apiKey)
 
 	resp, err := client.Do(req)
@@ -73,7 +73,7 @@ func getItems(apiKey string) (Items, error) {
 }
 
 
-func getItem(apiKey string, name string) (Items, error) {
+func getItem(apiKey string, tenantUrl string, name string) (Items, error) {
 
 	var items Items
 
@@ -82,7 +82,7 @@ func getItem(apiKey string, name string) (Items, error) {
 	}
 	client := &http.Client{Transport: transCfg}
 
-	req, err := http.NewRequest("GET", "https://qcs.us.qlikcloud.com/api/v1/items?limit=10&query="+name+"&sort=-createdAt", nil)
+	req, err := http.NewRequest("GET", tenantUrl+"/api/v1/items?limit=10&query="+name+"&sort=-createdAt", nil)
 	req.Header.Add("Authorization", "Bearer "+apiKey)
 
 	resp, err := client.Do(req)

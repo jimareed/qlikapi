@@ -5,18 +5,20 @@ import (
 )
 
 const apiKey = ""
+const tenantUrl = ""
 
 func main() {
 
-	items, err := getItem(apiKey, "Bugs")
+	items, err := getItem(apiKey, tenantUrl, "Bugs")
 	if err != nil {
-		fmt.Printf("Get Items error\n") 
+		fmt.Printf("Get Item error\n") 
 	} else {
 		for _, i := range items.Data {
-			fmt.Printf(i.Name)
-			fmt.Printf(",")
-			fmt.Printf(i.Id)
-			fmt.Printf("\n")
+			fmt.Printf("reloading " + i.Name + "\n")
+			_, err := reload(apiKey, tenantUrl, i.ResourceId)
+			if err != nil {
+				fmt.Printf("Reload error\n") 
+			}
 		}
 	}
 }
