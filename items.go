@@ -71,3 +71,31 @@ func getItems(apiKey string) (Items, error) {
 
 	return items, nil
 }
+
+
+func getItem(apiKey string, name string) (Items, error) {
+
+	var items Items
+
+	transCfg := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // ignore expired SSL certificates
+	}
+	client := &http.Client{Transport: transCfg}
+
+	req, err := http.NewRequest("GET", "https://qcs.us.qlikcloud.com/api/v1/items?limit=10&query="+name+"&sort=-createdAt", nil)
+	req.Header.Add("Authorization", "Bearer "+apiKey)
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return items, err
+	}
+
+	defer resp.Body.Close()
+
+	err = json.NewDecoder(resp.Body).Decode(&items)
+	if err != nil {
+		return items, err
+	}
+
+	return items, nil
+}
