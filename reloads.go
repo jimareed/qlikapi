@@ -1,4 +1,4 @@
-package main
+package qlikapi
 
 import (
 	"crypto/tls"
@@ -9,20 +9,20 @@ import (
 	"bytes"
 )
 
-type Reload struct {
+type ReloadStruct struct {
 	AppID    string     `json:"AppID"`
 }
 
-func reload(apiKey string, tenantUrl string, appId string) (Reload, error) {
+func Reload(apiKey string, tenantUrl string, appId string) (ReloadStruct, error) {
 
-	var reload Reload
+	var reload ReloadStruct
 
 	transCfg := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // ignore expired SSL certificates
 	}
 	client := &http.Client{Transport: transCfg}
 
-	reload = Reload{
+	reload = ReloadStruct{
 		AppID:         appId,
 	}
 

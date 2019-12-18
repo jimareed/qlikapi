@@ -1,7 +1,8 @@
-# qlikapi-reload-app
-Use the Qlik API to reload an app
+# qlikapi
+A high level wrapper around the Qlik API
 
 ```
+cd test
 go build .
-./qlikapi-reload-app
+./test
 ```

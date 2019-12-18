@@ -1,4 +1,4 @@
-package main
+package qlikapi
 
 import (
 	"crypto/tls"
@@ -45,7 +45,7 @@ type Items struct {
 	Data []Item
 }
 
-func getItems(apiKey string, tenantUrl string) (Items, error) {
+func GetItems(apiKey string, tenantUrl string) (Items, error) {
 
 	var items Items
 
@@ -73,7 +73,7 @@ func getItems(apiKey string, tenantUrl string) (Items, error) {
 }
 
 
-func getItem(apiKey string, tenantUrl string, name string) (Items, error) {
+func GetItem(apiKey string, tenantUrl string, name string) (Items, error) {
 
 	var items Items
 
